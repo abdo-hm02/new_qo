@@ -1,0 +1,6 @@
+logging:
+  level:
+    root: DEBUG
+    qoraa.net: TRACE
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE

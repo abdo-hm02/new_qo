@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: qoraa_test
+  config:
+    import:
+      - resource-server-test.yml
+      - keycloak-test.yml
+  main:
+    allow-circular-references: true
+
+---
+
+info:
+  title: Test Title
+  version: 1.0
+security:
+  enabled: true
+  scheme: Test Scheme
+  bearerFormat: Test BearerFormat

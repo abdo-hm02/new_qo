@@ -1,0 +1,9 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /QORAA
+  error:
+    include-exception: true
+    include-binding-errors: always
+    include-message: always
+    include-stacktrace: always

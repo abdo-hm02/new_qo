@@ -1,0 +1,26 @@
+users:
+  is:
+    inactive: "The user is inactive, It looks like you don't have privileges to access this information"
+    not:
+      found: "No active user found by this email."
+  username:
+    is:
+      not:
+        available: "The username %s is not available"
+        found: "User %s is not found"
+      found: "User %s is found"
+    exists: "User %s already exists"
+  status:
+    updated:
+      successfully: "User activated deactivated successfully"
+  created:
+    successfully: "User created successfully"
+  deleted:
+    successfully: "User deleted successfully"
+users-groups:
+  is:
+    found: "User group is found"
+    not:
+      found: "No user group is not found"
+  deleted:
+    successfully: "User group deleted successfully"

@@ -1,0 +1,18 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8180/realms/qoraa
+          jwk-set-uri: http://localhost:8180/realms/qoraa/protocol/openid-connect/certs
+          audience: qoraa-app
+
+keycloak:
+  realm: qoraa
+  auth-server-url: http://localhost:8180
+  resource: qoraa-app
+  credentials:
+    secret: ${KEYCLOAK_SECRET}
+  admin:
+    username: ${KEYCLOAK_ADMIN_USERNAME}
+    password: ${KEYCLOAK_ADMIN_PASSWORD}

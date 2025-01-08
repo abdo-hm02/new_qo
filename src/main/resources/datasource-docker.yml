@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://qoraa-postgres:5432/qoraa_db
+    username: qoraa_user
+    password: qoraa_password

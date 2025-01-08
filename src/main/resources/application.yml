@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: qoraa
+  config:
+    import:
+      - jpa.yml
+      - flyway.yml
+      - openapi.yml
+      - server.yml
+      - security.yml
+      - sql-init.yml
+  docker:
+    compose:
+      file: ./compose.yaml
+      enabled: true
+---
+spring:
+  config:
+    activate:
+      on-profile: development
+    import:
+      - datasource-dev.yml
+      - logging-dev.yml
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+    import:
+      - datasource-docker.yml
+  docker:
+    compose:
+      enabled: false

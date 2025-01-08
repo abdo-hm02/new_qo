@@ -1,0 +1,21 @@
+info:
+  title: Qoraa API Documentation
+  version: 1.0.0
+  web:
+    title: "Web API"
+security:
+  scheme: bearer
+  bearerFormat: JWT
+springdoc:
+  swagger-ui:
+    path: /doc/swagger-ui/index.html
+    operationsSorter: alpha
+    tagsSorter: alpha
+    displayRequestDuration: true
+    syntaxHighlight:
+      theme: arta
+  api-docs:
+    path: /api-docs
+    groups:
+      enabled: true
+  show-actuator: true

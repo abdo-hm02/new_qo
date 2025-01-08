@@ -1,0 +1,78 @@
+services:
+  postgres:
+    container_name: qoraa-postgres
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: qoraa_db
+      POSTGRES_USER: qoraa_user
+      POSTGRES_PASSWORD: qoraa_password
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - qoraa-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U qoraa_user -d qoraa_db" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    container_name: qoraa-pgadmin
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@qoraa.net
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    networks:
+      - qoraa-network
+    depends_on:
+      - postgres
+
+  keycloak:
+    container_name: qoraa-keycloak
+    image: quay.io/keycloak/keycloak:latest
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://qoraa-postgres:5432/keycloak
+      KC_DB_USERNAME: qoraa_user
+      KC_DB_PASSWORD: qoraa_password
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    command:
+      - start-dev
+    ports:
+      - "8180:8080"
+    networks:
+      - qoraa-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  qoraa:
+    container_name: qoraa-app
+    image: qoraa:latest
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - "8080:8080"
+    networks:
+      - qoraa-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+networks:
+  qoraa-network:
+    driver: bridge
+
+volumes:
+  postgres:
+  pgadmin:

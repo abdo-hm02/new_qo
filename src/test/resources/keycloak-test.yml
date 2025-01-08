@@ -1,0 +1,6 @@
+keycloak:
+  realm: qoraa
+  auth-server-url: http://localhost:8180
+  resource: qoraa-app
+  credentials:
+    secret: test-secret
